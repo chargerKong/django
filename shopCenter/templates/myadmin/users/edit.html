@@ -1,0 +1,81 @@
+{% extends 'myadmin/base.html'%}
+{% block mainContent %}
+<div class="span9">
+	<h2>
+		会员信息修改
+	</h2>
+	<form id="edit-profile" class="form-horizontal" method="post" action="{% url 'myadmin_users_update' data.id %}" enctype="multipart/form-data">
+		{% csrf_token%}
+		<fieldset>
+			<legend>修改信息</legend>
+			<div class="control-group">
+				<label class="control-label" for="input01" >账号</label>
+				<div class="controls">
+					<input type="text" class="input-xlarge" id="input01" name="username" disabled value={{data.username}} />
+				</div>
+			</div>
+			
+			<div class="control-group">
+				<label class="control-label" for="input04">真实姓名</label>
+				<div class="controls">
+					<input type="text" class="input-xlarge" id="input04" name="name" value={{data.name}} />
+				</div>
+			</div>	
+			<div class="control-group">
+				<label class="control-label" for="input05">性别</label>
+				<div class="controls">
+					<input type="radio" class="input-xlarge" id="input05"  value="1" name="sex" {% if data.sex == 1 %} checked {% endif %} /> 男  &nbsp; <input type="radio" class="input-xlarge" id="input06"  value="0" name="sex" {% if data.sex == 0 %} checked {% endif %}/>女
+				</div>
+			</div>		
+						
+			<div class="control-group">
+				<label class="control-label" for="input07">住址</label>
+				<div class="controls">
+					<input type="text" class="input-xlarge" id="input07" name="address" value={{data.address}} />
+				</div>
+			</div>	
+			<div class="control-group">
+				<label class="control-label" for="input08">电话号码</label>
+				<div class="controls">
+					<input type="text" class="input-xlarge" id="input08"  name="phone" value={{data.phone}} />
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="input09">邮箱</label>
+				<div class="controls">
+					<input type="text" class="input-xlarge" id="input09" name="email" value={{data.email}} />
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="input10">邮编</label>
+				<div class="controls">
+					<input type="text" class="input-xlarge" id="input10" name="code" value={{data.code}} />
+				</div>
+			</div>			
+
+			<div class="control-group">
+				<label class="control-label" for="input011">用户状态</label>
+				<div class="controls">
+					<input type="radio" class="input-xlarge" id="input013"  value="0" name="state" {% if data.state == 0 %} checked {% endif %} /> 管理员  &nbsp; <input type="radio" class="input-xlarge" id="input011"  value="1" name="state" {% if data.state == 1 %} checked {% endif %}/>普通用户 &nbsp; <input type="radio" class="input-xlarge" id="input012"  value="2" name="state" {% if data.state == 2 %} checked {% endif %}/>禁用账户
+				</div>
+			</div>
+
+			<div class="form-actions">
+				<button type="submit" class="btn btn-primary" id="mysub">修改</button> 
+				&nbsp;&nbsp;<button type="reset" class="btn">重置</button>
+			</div>
+		</fieldset>
+	</form>
+
+	<script type="text/javascript">
+		o1code = document.getElementById('mysub');
+		o1code.onclick = function(){
+			var ocode= document.getElementById('input10').value;
+				if (ocode.length>6){
+			alert("请填写六位及以下的邮编→_→")
+			return false
+			}
+		}
+	</script>
+</div>
+{% endblock %}

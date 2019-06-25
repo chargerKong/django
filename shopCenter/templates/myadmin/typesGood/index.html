@@ -1,0 +1,61 @@
+{% extends 'myadmin/base.html'%}
+
+{% block mainContent %}
+<style>
+	.fra{
+		display: inline-block;
+		
+		color: white;
+		padding: 5px 5px;
+		border-radius: 3px;
+	}
+
+	.bgGreen{
+		background-color: rgb(72,159,72);
+	}
+	.bgBlue{
+		background-color: blue;
+	}
+	.bgRed{
+		background-color: red;
+	}
+</style>
+<div class="span9">
+	<h2>
+		商品类别浏览
+	</h2>
+	<table class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th>id号</th>
+				<th>列表名称</th>
+				<th>父类别pid</th>
+				<th>路径path</th>
+				<th>操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for i in data %}
+				<tr>
+					<td class="memberId">{{i.id}}</td>
+					<td>{{i.pname}}{{i.name}}</td>
+					<td>{{i.pid}}</td>
+					<td>{{i.path}}</td>
+					<td>
+						<a href="{% url 'admin_types_add' i.id%}" class="fra bgGreen">添加子类</a>
+						<a href="{% url 'myadmin_types_edit' i.id %}" class="fra bgBlue">编辑</a> 
+						<a href="{% url 'myadmin_types_del' i.id %}" class="fra bgRed">删除</a>
+
+					</td>
+				</tr>
+			{% endfor %}
+
+		</tbody>
+	</table>				
+	
+</div>
+<script type="text/javascript">
+	
+</script>
+{% endblock %}
+

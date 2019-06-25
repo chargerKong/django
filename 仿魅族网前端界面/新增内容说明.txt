@@ -1,0 +1,21 @@
+1.新增或修改过的页面:
+	个人订单详情页(order.html)
+	个人中心(member.html)
+	购物车情页(cart.html)
+	登录和注册页面(login.html和register.html)
+2.新增或修改的css样式:
+	个人订单详情页(order.css和order-app.css)
+	个人中心(member.css和member-app.css)
+	购物车情页(cart.css和cart-app.css)
+	登录和注册页面(register.css)
+3.新增图片
+	img/cart
+	img/member
+	img/order
+
+4.Js文件修改
+
+```
+js/topNav.js
+```
+

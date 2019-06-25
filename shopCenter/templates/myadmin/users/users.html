@@ -1,0 +1,102 @@
+{% extends 'myadmin/base.html'%}
+
+{% block mainContent %}
+<style>
+	.fra{
+		display: inline-block;
+		
+		color: white;
+		padding: 5px 5px;
+		border-radius: 3px;
+	}
+
+	.bgGreen{
+		background-color: rgb(72,159,72);
+	}
+	.bgBlue{
+		background-color: blue;
+	}
+	.bgRed{
+		background-color: red;
+	}
+	.small-search{
+		width: 100px;
+	}
+	label{
+		display: inline-block;
+	}
+</style>
+<div class="span9">
+	<h2>
+		会员信息浏览
+	</h2>
+	<form method="get" action="{% url 'admin_users_index' 1 %}" class="form-horizontal" enctype="multipart/form-data">
+		{% csrf_token%}
+		<label >关键字：  <input type="text" class="small-search" name="search" placeholder="账号/姓名" id="inp01"></label>
+
+		性别：<select name="select"  class="small-search">
+				<option value="-1">请选择</option>
+				<option value="1">男</option>
+				<option value="0">女</option>
+			</select>
+
+		<button type="submit" class="btn">搜索</button>
+		<a href="{% url 'admin_users_index' 1 %}" class="btn">全部</a>
+	</form>
+	<table class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th>id号</th>
+				<th>账号</th>
+				<th>姓名</th>
+				<th>性别</th>
+				<th>邮箱</th>
+				<th>注册时间</th>
+				<th>状态</th>
+				<th>操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for i in data %}
+				<tr>
+					<td class="memberId">{{i.id}}</td>
+					<td>{{i.username}}</td>
+					<td>{{i.name}}</td>
+					<td>{% if i.sex == 1 %}男{% else %}女{% endif %}</td>
+					<td>{{i.email}}</td>
+					<td>{{i.addtime|date:"Y-m-d H:i:s" }}</td>
+					<td>{% if i.state == 0 %}<span style="color: green">管理员</span>{% elif i.state == 1%} 普通用户 {% else %}<span style="color: red">禁用</span>  {% endif %}</td>
+					<td>
+						<a href="{% url 'myadmin_users_editPaw' i.id %}" class="fra bgGreen">重置密码</a>
+						<a href="{% url 'myadmin_users_edit' i.id %}" class="fra bgBlue">编辑</a> 
+						<a href="{% url 'myadmin_users_del' i.id %}"class="fra bgRed">删除</a>
+					</td>
+				</tr>
+			{% endfor %}
+
+		</tbody>
+	</table>				
+	<div class="pagination">
+		<ul>
+			<!-- <li class="disabled"> -->
+			<li>
+				<a href="{% url 'admin_users_index' prePage%}?{{where}}" id="left">&laquo;</a>
+			</li>
+			
+			{% for i in list3 %}
+				{% if i == pindex %}
+					<li ><a style="color: red">{{i}}</a></li>
+				{% else %}
+					<li ><a  href="{% url 'admin_users_index' i %}?{{where}}">{{i}}</a></li>
+				{% endif %}
+			{% endfor %}
+			<li>
+				<a href="{% url 'admin_users_index' nextPage%}?{{where}}"id="right">&raquo;</a>
+			</li>
+			
+		</ul>
+	</div>
+</div>
+
+{% endblock %}
+

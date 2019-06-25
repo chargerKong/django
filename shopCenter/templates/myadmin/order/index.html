@@ -1,0 +1,101 @@
+{% extends 'myadmin/base.html'%}
+
+{% block mainContent %}
+<style>
+    
+    .small-search{
+        width: 100px;
+    }
+    label{
+        display: inline-block;
+    }
+</style>
+<div class="span9">
+    <h2>
+        订单信息管理  
+    </h2>
+    <form method="get" action="{% url 'myadmin_orders_index' %}" class="form-horizontal" enctype="multipart/form-data">
+        {% csrf_token%}
+        <label >关键字：  <input type="text" class="small-search" name="search" placeholder="收货人或地址" id="inp01"></label>
+
+        全部：<select name="select"  class="small-search">
+                <option value="-1">全部</option>
+                <option value="0">新订单</option>
+                <option value="1">已发货</option>
+                <option value="2">已完成</option>
+                <option value="3">无效订单</option>
+
+            </select>
+
+        <button type="submit" class="btn">搜索</button>
+        <a href="{% url 'myadmin_orders_index' %}" class="btn">全部</a>
+    </form>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>订单号</th>
+                <th>下单人</th>
+                <th>收货人</th>
+                <th>收货地址</th>
+                <th>金额</th>
+                <th>联系电话</th>
+                <th>时间</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in data %}
+                <tr>
+                    <td class="memberId">{{i.id}}</td>
+                    <td>{{i.username}}</td>
+                    <td>{{i.linkman}}</td>
+                    <td>{{i.address}}</td>
+                    <td>{{i.total}}</td>
+                    <td>{{i.phone}}</td>
+                    <td>{{i.addtime|date:"Y-m-d H:i:s" }}</td>
+                    <td>
+                       {% if i.state == 0 %}
+                        新订单
+                        {% elif i.state == 1 %}
+                            已发货
+                        {% elif i.state == 2 %}
+                            已完成
+                        {% elif i.state == 3 %}
+                            无效订单
+                        {% else %}
+                            未知
+                        {% endif %}
+                    <td>
+                        <a href="{% url 'myadmin_orders_detail' i.id %}" class="fra bgGreen">查看详情</a>
+                       
+                    </td>
+                </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>                
+    <div class="pagination">
+        <ul>
+            <!-- <li class="disabled"> -->
+            <li>
+                <a href="{% url 'myadmin_orders_index' pindex|add:-1 %}?{{where}}" id="left">&laquo;</a>
+            </li>
+            
+            {% for i in list3 %}
+                {% if i == pindex %}
+                    <li ><a style="color: red">{{i}}</a></li>
+                {% else %}
+                    <li ><a  href="{% url 'myadmin_orders_index' i%}?{{where}}">{{i}}</a></li>
+                {% endif %}
+            {% endfor %}
+            <li>
+                <a href="{% url 'myadmin_orders_index' pindex|add:1 %}?{{where}}"id="right">&raquo;</a>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+{% endblock %}
+

@@ -1,0 +1,162 @@
+{% extends 'web/base.html'%}
+{% load static from staticfiles%}
+{% block head %}
+  <link rel="stylesheet" type="text/css" href="{% static 'web/css/order.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'web/css/order-app.css' %}">
+  <style>
+  	.control-group{
+  		margin-top: 20px;
+  		height: 30px;
+  	}
+  	.control-label{
+  		float: left;
+  		width: 190px;
+  		text-align: right;
+  		height: 30px;
+  		line-height: 30px;
+  		margin-right: 20px;
+  	}
+  	.controls{
+  		float: left;
+  	}
+  	.input-xlarge{
+  		width: 270px;
+  		border-radius: 5px;
+  		height: 30px;
+
+  	}
+  	input{
+  		border-width: 1px;
+  	}
+  	input:focus {
+	  border-color: rgba(82, 168, 236, 0.5);
+	  outline:none;
+	  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
+	}
+
+	.formaction{
+		margin-top: 30px;
+		background-color: rgb(245,245,245);
+		height: 70px;
+		width: 100%;
+		padding: 20px 190px
+	}
+	.priamry{
+		background-color: blue;
+	}
+	.btn{
+		margin-right: 10px;
+		border-radius: 5px;	
+		color: #444;
+		box-shadow: inset 0 1px 0 rgba(255,255,255,0.2), 0 1px 2px rgba(0,0,0,0.05);
+		background-image:linear-gradient(to bottom,#fff,#e6e6e6);
+		background-color:#f5f5f5;
+		text-shadow: 0 1px 1px rgba(255,255,255,0.75);
+		border: 1px solid #ccc;
+		/*transition: background-image 1s*/
+	}
+	.btn:hover{
+		background-image:linear-gradient(to bottom,#ccc,#ccc);
+	}
+	
+  </style>
+{% endblock %}
+
+{% block mainContent %}
+<div class="mainbody order">
+  <div class="container">
+	<!-- 面包屑导航 -->
+	<div class="crumbs col-xs-12 col-sm-12">
+	  <ol class="breadcrumb">
+		<li class="hidden-xs hidden-sm"><a href="index.html">首页</a></li>
+		<li class="hidden-xs hidden-sm"><a href="member.html">我的商城</a></li>
+		<li class="active">个人中心</li>
+	  </ol>
+	</div><!-- 面包屑导航 E-->
+		
+	<div class="main clearfix">
+		<!-- 左侧导航 -->
+		
+		<div class="left-nav f-fl col-md-4 hidden-xs hidden-sm">
+			<div class="nav-main">
+				<a href="javascript:;" class="type-title"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>订单中心</a>
+				<a href="{% url 'vip_viporder' %}" class="ml active" >我的订单</a>
+				<a href="#" class="ml " >我的回购单</a>
+				<a href="#" class="ml " >我的意外保</a>
+				<a href="javascript:;" class="type-title"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>个人中心</a>
+				<a href="{% url 'vip_vipinfo' %}" class="ml " >个人信息</a>
+				<a href="{% url 'vip_changPsw'%}" class="ml " >修改密码</a>
+				<a href="#" class="ml " >消息提醒</a>
+				<a href="#" class="ml " >建议反馈</a>
+			</div>
+		</div><!-- 左侧导航 E-->
+			
+
+		
+		<!-- 右侧内容展示 -->
+		<form action="{% url 'vip_vipchange' %}" method="post">
+			{% csrf_token %}
+			<div class="right-content f-fr col-md-8 col-xs-12 col-sm-12">
+				<hr/>
+				<div class="control-group">
+					<label class="control-label" for="input01">账号:</label>
+					<div class="controls">
+						<input type="text" class="input-xlarge" id="input01" name="username" disabled value='{{request.session.vipuser.username}}' />
+					</div>
+				</div>
+
+				<div class="control-group">
+					<label class="control-label" for="input02">真实姓名:</label>
+					<div class="controls">
+						<input type="text" class="input-xlarge" id="input02" name="name" value='{{request.session.vipuser.name}}' />
+					</div>
+				</div>
+
+				<div class="control-group">
+					<label class="control-label" for="input03">性别:</label>
+					<div class="controls">
+						<input type="radio"  id="input03" name="sex" value ="1"{% if request.session.vipuser.sex == 1 %} checked {% endif %} /> 男
+						<input type="radio"  id="input14" name="sex" value="0" {% if request.session.vipuser.sex == 0 %} checked {% endif %} /> 女
+					</div>
+				</div>
+				
+				<div class="control-group">
+					<label class="control-label" for="input04">地址:</label>
+					<div class="controls">
+						<input type="text" class="input-xlarge" id="input04" name="address" value='{{request.session.vipuser.address}}' />
+					</div>
+				</div>
+
+				<div class="control-group">
+					<label class="control-label" for="input05">邮编:</label>
+					<div class="controls">
+						<input type="text" class="input-xlarge" id="input05" name="code" value='{{request.session.vipuser.code}}' />
+					</div>
+				</div>
+
+				<div class="control-group">
+					<label class="control-label" for="input06">电话:</label>
+					<div class="controls">
+						<input type="text" class="input-xlarge" id="input06" name="phone" value='{{request.session.vipuser.phone}}' />
+					</div>
+				</div>
+
+				<div class="control-group">
+					<label class="control-label" for="input06">邮箱:</label>
+					<div class="controls">
+						<input type="text" class="input-xlarge" id="input06" name="email" value='{{request.session.vipuser.email}}' />
+					</div>
+				</div>
+
+				<div class='formaction'>
+					<button type='submit' class=" btn priamry">保存</button>
+					<button type='reset' class="btn">重置</button>
+				</div>
+
+			</div>
+		</form>
+	</div>
+  </div>	
+</div>
+<!-- 主内容区域 E-->
+{% endblock %}

@@ -1,0 +1,99 @@
+{% extends 'myadmin/base.html' %}
+
+{% block mainContent%}
+<link rel="stylesheet" type="text/css" href="/ueditor/UE/third-party/SyntaxHighlighter/shCoreDefault.css">
+    <script type="text/javascript" src="/ueditor/UE/third-party/SyntaxHighlighter/shCore.js"></script>
+    <script type="text/javascript" src="/ueditor/UE/ueditor.config.js"></script>
+    <script type="text/javascript" src="/ueditor/UE/ueditor.all.min.js"></script>
+    <script type="text/javascript" src="/ueditor/UE/lang/zh-cn/zh-cn.js"></script>
+
+
+<div class="span9">
+    <h2>
+        商品信息添加
+    </h2>
+    <form id="edit-profile" class="form-horizontal" method="post" action="{% url 'myadmin_goods_insert' %}" enctype="multipart/form-data">
+        {% csrf_token%}
+        <fieldset>
+            <legend>添加商品信息</legend>
+            <div class="control-group">
+                <label class="control-label" for="input01">商品类别</label>
+                <div class="controls">
+                    <select name="typeid"class="control-label" >
+                        {% for i in data %}
+                            <option {% if i.pid == 0 %}disabled {% endif %} value="{{i.id}}">{{i.pname}}|{{i.name}}</option>
+                        {% endfor %}
+                    </select>
+                 </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="input02">商品名称</label>
+                <div class="controls">
+                    <input type="text" class="input-xlarge" id="input02" name="goods"  />
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="input03">生产厂家</label>
+                <div class="controls">
+                    <input type="text" class="input-xlarge" id="input03" name="company" />
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="input04">单价</label>
+                <div class="controls">
+                    <input type="text" class="input-xlarge" id="input04" name="price" />
+                </div>
+            </div>  
+               
+                        
+            <div class="control-group">
+                <label class="control-label" for="input07">库存量</label>
+                <div class="controls">
+                    <input type="text" class="input-xlarge" id="input07" name="store" />
+                </div>
+            </div>  
+            <div class="control-group">
+                <label class="control-label" for="input08">商品图片</label>
+                <div class="controls">
+                    <input type="file" class="input-xlarge" id="input08"  name="picname" />
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="input09">商品简介</label>
+                <div class="controls">
+                    <script id="editor" name="content" type="text/plain" style="height:300px;"></script>
+
+                </div>
+            </div>
+                         
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary" id="infoSubmit">保存</button> 
+                &nbsp;&nbsp;<button type="reset" class="btn">重置</button>
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+<script type="text/javascript">
+    var ue = UE.getEditor('editor');
+    SyntaxHighlighter.all();
+
+    let infoSubmit = document.getElementById("infoSubmit")
+    infoSubmit.onclick = function(){
+        let [goods,company,price,store,picname,content] 
+            = [document.getElementById("input02").value,
+            document.getElementById("input02").value,
+            document.getElementById("input03").value,
+            document.getElementById("input04").value,
+            document.getElementById("input07").value,
+            document.getElementById("input08").value,
+            document.getElementById("editor").value];
+        if (!(goods&&company&&price&&store&&picname&&content)){
+            alert("请把信息输入完整")
+            return false
+        }
+        
+    }
+</script>
+
+{% endblock %}

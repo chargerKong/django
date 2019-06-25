@@ -1,0 +1,114 @@
+{% extends 'myadmin/base.html'%}
+
+{% block mainContent %}
+{% load static  from staticfiles %}
+<style>
+	.fra{
+		display: inline-block;
+		
+		color: white;
+		padding: 5px 5px;
+		border-radius: 3px;
+	}
+
+	.bgGreen{
+		background-color: rgb(72,159,72);
+	}
+	.bgBlue{
+		background-color: blue;
+	}
+	.bgRed{
+		background-color: red;
+	}
+	.small-search{
+		width: 100px;
+	}
+	label{
+		display: inline-block;
+	}
+</style>
+<div class="span9">
+	<h2>
+		商品信息浏览
+	</h2>
+	<form method="get" action="{% url 'admin_goods_index' 1%}" class="form-horizontal" enctype="multipart/form-data">
+		{% csrf_token%}
+		<label >关键字：  <input type="text" class="small-search" name="search" placeholder="商品名称" id="inp01"></label>
+		
+
+		类别：<select name="type"  class="small-search">
+				<option value="-1">请选择</option>
+				{% for i in typelist %}
+					<option value="{{i.id}}">{{i.pname}}|{{i.name}}</option>
+				{% endfor %}
+				
+			</select>
+
+
+		状态：<select name="select"  class="small-search">
+				<option value="-1">请选择</option>
+				<option value="0">新商品</option>
+				<option value="1">在售</option>
+				<option value="2">售罄</option>
+			</select>
+
+		<button type="submit" class="btn">搜索</button>
+		<a href="{% url 'admin_goods_index' 1 %}" class="btn">全部</a>
+	</form>
+	<table class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th>id号</th>
+				<th>商品名称</th>
+				<th>商品类别</th>
+				<th>图片</th>
+				<th>价格</th>
+				<th>点击量</th>
+				<th>状态</th>
+				<th>操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for i in data %}
+				<tr>
+					<td class="memberId">{{i.id}}</td>
+					<td>{{i.goods}}</td>
+					<td>{{i.name}}</td>
+					<td><img src="{% static 'pics/s75_'%}{{i.picname}}" alt=""></td>
+					<td>{{i.price}}</td>
+					<td>{{i.clicknum}}</td>
+					<td>{% if i.state == 0 %}<span style="color: green">新商品</span>{% elif i.state == 1%} 在售 {% else %}<span style="color: red">售罄</span>  {% endif %}</td>
+					<td>
+						
+						<a href="{% url 'myadmin_goods_edit' i.id %}" class="fra bgBlue">编辑</a> 
+						<a href="{% url 'myadmin_goods_del' i.id %}"class="fra bgRed">删除</a>
+					</td>
+				</tr>
+			{% endfor %}
+
+		</tbody>
+	</table>				
+	<div class="pagination">
+		<ul>
+			<!-- <li class="disabled"> -->
+			<li>
+				<a href="{% url 'admin_goods_index' prePage%}?{{where}}" id="left">&laquo;</a>
+			</li>
+			
+			{% for i in list3 %}
+				{% if i == pindex %}
+					<li ><a style="color: red">{{i}}</a></li>
+				{% else %}
+					<li ><a  href="{% url 'admin_goods_index' i %}?{{where}}">{{i}}</a></li>
+				{% endif %}
+			{% endfor %}
+			<li>
+				<a href="{% url 'admin_goods_index' nextPage%}?{{where}}"id="right">&raquo;</a>
+			</li>
+			
+		</ul>
+	</div>
+</div>
+
+{% endblock %}
+

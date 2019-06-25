@@ -1,0 +1,94 @@
+{% extends 'myadmin/base.html'%}
+{% load static from staticfiles %}
+{% block mainContent %}
+<link rel="stylesheet" type="text/css" href="/ueditor/UE/third-party/SyntaxHighlighter/shCoreDefault.css">
+    <script type="text/javascript" src="/ueditor/UE/third-party/SyntaxHighlighter/shCore.js"></script>
+    <script type="text/javascript" src="/ueditor/UE/ueditor.config.js"></script>
+    <script type="text/javascript" src="/ueditor/UE/ueditor.all.min.js"></script>
+    <script type="text/javascript" src="/ueditor/UE/lang/zh-cn/zh-cn.js"></script>
+<div class="span9">
+	<h2>
+		商品信息修改
+	</h2>
+	<form id="edit-profile" class="form-horizontal" method="post" action="{% url 'myadmin_goods_update' data.id %}" enctype="multipart/form-data">
+		{% csrf_token%}
+		<fieldset>
+			<legend>修改商品信息</legend>
+			 <div class="control-group">
+                <label class="control-label" for="input01">商品类别</label>
+                <div class="controls">
+                    <input type="text" class="input-xlarge" id="input01" name="typeid" value="{{data.typeid}}"disabled/>
+                 </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="input02">商品名称</label>
+                <div class="controls">
+                    <input type="text" class="input-xlarge" id="input02" name="goods" value="{{data.goods}}"  />
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="input03">生产厂家</label>
+                <div class="controls">
+                    <input type="text" class="input-xlarge" id="input03" name="company" value="{{data.company}}" />
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="input04">单价</label>
+                <div class="controls">
+                    <input type="text" class="input-xlarge" id="input04" name="price" value="{{data.price}}" />
+                </div>
+            </div>  
+               
+                        
+            <div class="control-group">
+                <label class="control-label" for="input07">库存量</label>
+                <div class="controls">
+                    <input type="text" class="input-xlarge" id="input07" name="store" value="{{data.store}}" />
+                </div>
+            </div>  
+            <div class="control-group">
+                <label class="control-label" for="input08">商品图片</label>
+                <div class="controls">
+                    <input type="file" class="input-xlarge" id="input08"  name="picname" value="{{data.picname}}" />
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="input08">点击量</label>
+                <div class="controls">
+                    <input type="text" class="input-xlarge" id="input08"  name="clicknum" value="{{data.clicknum}}" />
+                </div>
+            </div>
+
+
+			<div class="control-group">
+				<label class="control-label" for="input011">状态</label>
+				<div class="controls">
+					<input type="radio" class="input-xlarge" id="input013"  value="0" name="state" {% if data.state == 0 %} checked {% endif %}/>新品  &nbsp; 
+                    <input type="radio" class="input-xlarge" id="input011"  value="1" name="state" {% if data.state == 1 %} checked {% endif %}/>在售 &nbsp; 
+                    <input type="radio" class="input-xlarge" id="input012"  value="2" name="state" {% if data.state == 2 %} checked {% endif %}/>售罄
+				</div>
+			</div>
+
+			<div class="control-group">
+                <label class="control-label" for="input09">商品简介</label>
+                <div class="controls">
+                    <script id="editor" name="content" type="text/plain" style="height:300px;" >{{data.content|safe}}</script>
+
+                </div>
+            </div>
+
+			<div class="form-actions">
+				<button type="submit" class="btn btn-primary" id="mysub">修改</button> 
+				&nbsp;&nbsp;<button type="reset" class="btn">重置</button>
+			</div>
+		</fieldset>
+        <center><img src="{% static 'pics/s225_'%}{{data.picname}}" alt=""></center>
+        
+	</form>
+
+<script type="text/javascript">
+	var ue = UE.getEditor('editor');
+	SyntaxHighlighter.all();
+</script>
+</div>
+{% endblock %}
