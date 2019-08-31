@@ -33,7 +33,7 @@ django
  ![](https://github.com/chargerKong/django/blob/master/screenshot/%E5%95%86%E5%93%81%E7%BB%93%E7%AE%97.jpg)
  
  - 查看我的订单
- ![](https://github.com/chargerKong/django/blob/master/screenshot/%E8%AE%A2%E5%8D%95%E4%BF%A1%E6%81%AF%E6%9F%A5%E7%9C%8B.jpg)
+ ![](https://github.com/chargerKong/django/blob/master/screenshot/%E5%88%86%E9%A1%B5%E6%9F%A5%E7%9C%8B%E6%88%91%E7%9A%84%E8%AE%A2%E5%8D%95.jpg)
  
  - 商城后台登录,账号：admin 密码: admin
  ![](https://github.com/chargerKong/django/blob/master/screenshot/%E5%95%86%E5%9F%8E%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95.jpg)
@@ -41,4 +41,4 @@ django
  - 登录成功后可以进行会员信息管理（包括查看信息，修改密码，添加会员），订单信息管理，商品类别管理等
  ![](https://github.com/chargerKong/django/blob/master/screenshot/%E5%90%8E%E5%8F%B0%E9%A6%96%E9%A1%B5.jpg)
  ![](https://github.com/chargerKong/django/blob/master/screenshot/%E5%90%8E%E5%8F%B0%E4%BC%9A%E5%91%98%E4%BF%A1%E6%81%AF%E6%B5%8F%E8%A7%88.jpg)
- 
+![](https://github.com/chargerKong/django/blob/master/screenshot/%E8%AE%A2%E5%8D%95%E4%BF%A1%E6%81%AF%E6%9F%A5%E7%9C%8B.jpg)
