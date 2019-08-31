@@ -21,7 +21,7 @@ django
  ![](https://github.com/chargerKong/django/blob/master/screenshot/%E7%99%BB%E5%BD%95%E6%B3%A8%E5%86%8C.jpg)
  
  - 登录后的页面可以进入个人中心和我的订单
- ![](https://github.com/chargerKong/django/blob/master/screenshot/%E7%99%BB%E5%BD%95%E6%B3%A8%E5%86%8C.jpg)
+ ![](https://github.com/chargerKong/django/blob/master/screenshot/%E7%99%BB%E5%BD%95%E6%88%90%E5%8A%9F%E5%90%8E.jpg)
  
  - 点击全部商品可以查看商品分页内容
  ![](https://github.com/chargerKong/django/blob/master/screenshot/%E5%95%86%E5%93%81%E5%88%86%E9%A1%B5%E6%B5%8F%E8%A7%88.jpg)
