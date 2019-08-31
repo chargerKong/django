@@ -29,8 +29,8 @@ django
  - 购物车信息查看
  ![](https://github.com/chargerKong/django/blob/master/screenshot/%E5%95%86%E5%93%81%E6%B7%BB%E5%8A%A0%E8%B4%AD%E7%89%A9%E8%BD%A6.jpg)
  
- -商品信息填写购买
- ![](https://github.com/chargerKong/django/blob/master/screenshot/%E5%95%86%E5%93%81%E6%B7%BB%E5%8A%A0%E8%B4%AD%E7%89%A9%E8%BD%A6.jpg)
+ - 商品信息填写购买
+ ![](https://github.com/chargerKong/django/blob/master/screenshot/%E5%95%86%E5%93%81%E7%BB%93%E7%AE%97.jpg)
  
  - 查看我的订单
  ![](https://github.com/chargerKong/django/blob/master/screenshot/%E8%AE%A2%E5%8D%95%E4%BF%A1%E6%81%AF%E6%9F%A5%E7%9C%8B.jpg)
